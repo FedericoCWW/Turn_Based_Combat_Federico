@@ -16,11 +16,13 @@ Hay 3 clases para escoger con diferentes atributos de salud, ataque y defensa:
 - Puntos de ataque: 12
 - Puntos de defensa: 7
 
-El enemigo se genera con atributos aleatorios, por lo que el jugador debe ser cuando atacar o defenderse.
+El enemigo se genera con atributos aleatorios, por lo que el jugador debe saber cuando atacar o defenderse.
 
-El juego consta del turno del jugador donde puede atacar o defenderse, luego viene el turno de la maquina. El juego acaba cuando la vida del jugador o la maquina llega a 0.
+El juego consta de 2 fases, el turno del jugador donde puede atacar o defenderse, luego viene el turno de la maquina. El juego acaba cuando la vida del jugador o la maquina llega a 0.
 
 En un futuro me gustaria agregar mas rondas con objetos especiales (armas, posimas, etc) y agregar sistema puntaje.
 
+
+Version .NET Framework = 4.7.2
 
 
