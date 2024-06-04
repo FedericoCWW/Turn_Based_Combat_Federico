@@ -35,7 +35,7 @@ namespace TurnBasedCombat
                     break;
                 case 'p':
                     player.Name = "Paladin";
-                    player.Attack = 15;
+                    player.Attack = 12;
                     player.Defense = 7;
                     player.HitPoints = 65;
                     break;
