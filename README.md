@@ -23,4 +23,6 @@ El juego consta de 2 fases, el turno del jugador donde puede atacar o defenderse
 En un futuro me gustaria agregar mas rondas con objetos especiales (armas, posimas, etc) y agregar sistema puntaje.
 
 
+Version .NET Framework = 4.7.2
+
 
