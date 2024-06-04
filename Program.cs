@@ -48,6 +48,8 @@ namespace TurnBasedCombat
             CrearEnemigo(enemy, rng);          //funcion para crear enemigo
             while (player.HitPoints > 0 && enemy.HitPoints > 0)
             {
+                // el campo isdefending se resetea cada turno (isDefending = false).
+                player.isDefending = enemy.isDefending = false;
                 Console.WriteLine(player.ToString());
                 Console.WriteLine("//////////////////////////////////////////////");
                 Console.WriteLine(enemy.ToString());
