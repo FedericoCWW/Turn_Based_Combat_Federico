@@ -20,7 +20,7 @@ El enemigo se genera con atributos aleatorios, por lo que el jugador debe saber 
 
 El juego consta de 2 fases, el turno del jugador donde puede atacar o defenderse, luego viene el turno de la maquina. El juego acaba cuando la vida del jugador o la maquina llega a 0.
 
-En un futuro me gustaria agregar mas rondas con objetos especiales (armas, posimas, etc) y agregar sistema puntaje.
+El juego cuenta con un sistema de puntajes. Falta  agregar items especiales y algunos encuentros aleatorios.
 
 
 Version .NET Framework = 4.7.2
