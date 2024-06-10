@@ -12,6 +12,8 @@ namespace TurnBasedCombat
         static void Main(string[] args)
         {
             //Clase Random para generar numeros aleatorios
+            bool seguir = true;
+            int puntos = 0;
             Random rng = new Random();
             Console.Title = "Turn based Combat";
             Console.Write("Hay 3 clases (ingrese cualquier otra tecla para salir del programa):\n - g = Guerrero \n - m = Mago \n - p = Paladin \nElige tu clase: ");
@@ -46,64 +48,81 @@ namespace TurnBasedCombat
             Console.WriteLine($"Elegiste la clase: {player.Name}");
             Player enemy = new Player();
             CrearEnemigo(enemy, rng);          //funcion para crear enemigo
-            while (player.HitPoints > 0 && enemy.HitPoints > 0)
+            while(seguir)
             {
-                // el campo isdefending se resetea cada turno (isDefending = false).
-                player.isDefending = enemy.isDefending = false;
-                Console.WriteLine(player.ToString());
-                Console.WriteLine("//////////////////////////////////////////////");
-                Console.WriteLine(enemy.ToString());
-                //Turno jugador
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Turno del jugador");
-                Console.ResetColor();
-                Console.WriteLine("ingrese 'a' para atacar o 'd' para defender:");
-                char choice = Convert.ToChar(Console.ReadLine());
-                if (choice == 'a')
+                while (player.HitPoints > 0 && enemy.HitPoints > 0)
                 {
-                    //funcion para atacar
-                    TurnoAtaque(player, enemy);
-                }
-                else
-                {
-                    //funcion para defenderse
-                    TurnoDefensa(player);
-                }
-                //Thread.Sleep(1000);
-                //turno Enemigo
-                if (enemy.HitPoints > 0)
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine("Turno del enemigo");
+                    // el campo isdefending se resetea cada turno (isDefending = false).
+                    player.isDefending = enemy.isDefending = false;
+                    Console.WriteLine(player.ToString());
+                    Console.WriteLine("//////////////////////////////////////////////");
+                    Console.WriteLine(enemy.ToString());
+                    //Turno jugador
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Turno del jugador");
                     Console.ResetColor();
-                    int enemy_choice = rng.Next(0,2);
-                    //0 = Ataca ; 1 = Defiende
-                    if (enemy_choice == 0)
+                    Console.WriteLine("ingrese 'a' para atacar o 'd' para defender:");
+                    char choice = Convert.ToChar(Console.ReadLine());
+                    if (choice == 'a')
                     {
-                        //ataque enemigo
-                        TurnoAtaque(enemy, player);
+                        //funcion para atacar
+                        TurnoAtaque(player, enemy);
                     }
                     else
                     {
-                        //defiende enemigo
-                        TurnoDefensa(enemy);
+                        //funcion para defenderse
+                        TurnoDefensa(player);
+                    }
+                    //Thread.Sleep(1000);
+                    //turno Enemigo
+                    if (enemy.HitPoints > 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine("Turno del enemigo");
+                        Console.ResetColor();
+                        int enemy_choice = rng.Next(0,2);
+                        //0 = Ataca ; 1 = Defiende
+                        if (enemy_choice == 0)
+                        {
+                            //ataque enemigo
+                            TurnoAtaque(enemy, player);
+                        }
+                        else
+                        {
+                            //defiende enemigo
+                            TurnoDefensa(enemy);
+                        }
                     }
                 }
+                Console.WriteLine(player.ToString());
+                Console.WriteLine("//////////////////////////////////////////////");
+                Console.WriteLine(enemy.ToString());
+                if (player.HitPoints < 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Perdiste el juego");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Ganaste");
+                    puntos++;
+                }
+                char cont = Continuar();
+                if (cont == '0') 
+                {
+                    seguir = false;
+                }
+                else
+                {
+                    CrearEnemigo(enemy, rng);
+                }
             }
-            Console.WriteLine(player.ToString());
-            Console.WriteLine("//////////////////////////////////////////////");
-            Console.WriteLine(enemy.ToString());
-            if (player.HitPoints < 0)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Perdiste el juego");
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Ganaste el juego");
-            }
+            Console.ForegroundColor= ConsoleColor.Green;
+            Console.WriteLine($"Puntaje: {puntos}");
         }
+
+
         static void CrearEnemigo(Player enemigo, Random rng) 
         {
             enemigo.Name = "Enemigo";
@@ -130,6 +149,14 @@ namespace TurnBasedCombat
             Console.ForegroundColor= ConsoleColor.Cyan;
             Console.WriteLine($"El {defensor.Name} se defiende");
             Console.ResetColor();
+        }
+
+        static char Continuar()
+        {
+            Console.ResetColor();
+            Console.Write("¿Quiere ser jugando?\n0 - No\n1 - Si\n");
+            char choice = Convert.ToChar(Console.ReadLine());
+            return (choice);
         }
     }
 }
